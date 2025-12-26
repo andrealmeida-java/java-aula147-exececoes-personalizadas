@@ -10,9 +10,9 @@ public class Reservation {
 	private LocalDate checkIn;
 	private LocalDate checkOut;
 	private static DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	
+
 	public Reservation() {
-		
+
 	}
 
 	public Reservation(Integer roomNumber, LocalDate checkIn, LocalDate checkOut) {
@@ -42,24 +42,24 @@ public class Reservation {
 		int days = p.getDays();
 		return days;
 	}
-	
-	public void updateDates(LocalDate checkIn, LocalDate checkOut) {
+
+	public String updateDates(LocalDate checkIn, LocalDate checkOut) {
+		
+		if (checkIn.isBefore(LocalDate.now()) || checkOut.isBefore(checkOut)) {
+			return "Reservation dates for update must be future dates";
+		} 
+		if (!checkOut.isAfter(checkIn)) {
+			return "Check-out date must be after check-in date";
+		}
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
+		return null;
 	}
 
 	@Override
 	public String toString() {
-		return "Room " +
-				roomNumber +
-				", check-in: " +
-				checkIn.format(fmt) +
-				", check-out: " +
-				checkOut.format(fmt) +
-				", " +
-				duration() +
-				" nights";
+		return "Room " + roomNumber + ", check-in: " + checkIn.format(fmt) + ", check-out: " + checkOut.format(fmt)
+				+ ", " + duration() + " nights";
 	}
-	
-	
+
 }
