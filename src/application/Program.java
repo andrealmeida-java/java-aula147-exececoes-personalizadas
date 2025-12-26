@@ -6,6 +6,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import model.entities.Reservation;
+import model.exceptions.DomainException;
 
 public class Program {
 
@@ -35,7 +36,7 @@ public class Program {
 			reservation.updateDates(checkIn, checkOut);
 			System.out.println("Reservation: " + reservation);
 		}
-		catch(IllegalArgumentException e) {
+		catch(DomainException e) {
 			System.out.println("Error in reservation: " + e.getMessage());
 		}
 		sc.close();
